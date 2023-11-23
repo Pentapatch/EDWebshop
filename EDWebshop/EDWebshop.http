@@ -1,6 +1,0 @@
-@EDWebshop_HostAddress = http://localhost:5098
-
-GET {{EDWebshop_HostAddress}}/weatherforecast/
-Accept: application/json
-
-###
