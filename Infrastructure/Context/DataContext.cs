@@ -1,4 +1,5 @@
-﻿using Microsoft.EntityFrameworkCore;
+﻿using Entity.Entities;
+using Microsoft.EntityFrameworkCore;
 
 namespace Infrastructure.Context
 {
@@ -8,7 +9,6 @@ namespace Infrastructure.Context
 
         public DataContext() { } // For use by MSTest
 
-        // TODO: Add tables
-        //public virtual DbSet<Entity> Entities { get; set; }
+        public virtual DbSet<FlowerProduct> Products { get; set; }
     }
 }
