@@ -4,7 +4,7 @@ using Microsoft.EntityFrameworkCore;
 
 namespace Infrastructure.Seeding
 {
-    public class ProductSeeder(DataContext context) : IDataSeeder
+    public class FlowerProductSeeder(DataContext context) : IDataSeeder
     {
         private readonly DataContext _context = context;
 

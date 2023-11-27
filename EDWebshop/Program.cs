@@ -28,7 +28,7 @@ builder.Services.AddDbContext<DataContext>(options =>
 });
 
 // Dependency Injection
-builder.Services.AddScoped<IDataSeeder, ProductSeeder>();
+builder.Services.AddScoped<FlowerProductSeeder, FlowerProductSeeder>();
 
 var app = builder.Build();
 
@@ -55,8 +55,8 @@ try
     await context.Database.MigrateAsync();
 
     // Seed some initial products
-    var productSeeder = services.GetRequiredService<IDataSeeder>();
-    productSeeder.Seed();
+    var productSeeder = services.GetRequiredService<FlowerProductSeeder>();
+    await productSeeder.Seed();
 }
 catch (Exception ex)
 {
