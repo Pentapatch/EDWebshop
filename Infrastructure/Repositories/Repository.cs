@@ -7,7 +7,7 @@ namespace EDWebshop.Data.Repositories
         where T : class, IEntity
         where T2 : DbContext
     {
-        private readonly T2 _dataContext = context;
+        protected readonly T2 _dataContext = context;
 
         public async Task<T> CreateAsync(T item)
         {
@@ -22,10 +22,10 @@ namespace EDWebshop.Data.Repositories
             await _dataContext.SaveChangesAsync();
         }
 
-        public async Task<IEnumerable<T>> GetAllAsync() =>
+        public virtual async Task<IEnumerable<T>> GetAllAsync() =>
             await _dataContext.Set<T>().ToListAsync();
 
-        public async Task<T?> GetAsync(int id) =>
+        public virtual async Task<T?> GetAsync(int id) =>
             await _dataContext.Set<T>().FindAsync(id) ??
             await _dataContext.Set<T>().FirstOrDefaultAsync(x => x.Id == id); // Note: Comprise fallback for MSTest
 
