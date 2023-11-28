@@ -1,6 +1,6 @@
 ﻿namespace Entity.Entities
 {
-    public class FlowerProduct
+    public class FlowerProduct : IEntity
     {
         public int Id { get; set; }
 
