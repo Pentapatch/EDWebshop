@@ -1,6 +1,6 @@
-﻿using Entity.Entities;
-using Infrastructure.Context;
-using Infrastructure.Repositories;
+﻿using EDWebshop.Contracts.Entities;
+using EDWebshop.Data.Context;
+using EDWebshop.Data.Repositories;
 using Moq;
 using Moq.EntityFrameworkCore;
 

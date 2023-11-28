@@ -18,6 +18,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\Entity\EDWebshop.Contracts.csproj" />
     <ProjectReference Include="..\Infrastructure\EDWebshop.Data.csproj" />
   </ItemGroup>
 

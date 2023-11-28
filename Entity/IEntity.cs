@@ -1,4 +1,4 @@
-﻿namespace Entity
+﻿namespace EDWebshop.Contracts
 {
     public interface IEntity
     {

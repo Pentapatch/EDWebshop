@@ -1,6 +1,6 @@
-﻿namespace EDWebshop.Contracts.Entities
+﻿namespace EDWebshop.Contracts.DTOs
 {
-    public class ProductVariant
+    public class ProductVaritantDto
     {
         public int Id { get; set; }
 

@@ -1,4 +1,4 @@
-﻿namespace Entity.Entities
+﻿namespace EDWebshop.Contracts.Entities
 {
     public class FlowerProduct : IEntity
     {

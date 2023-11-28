@@ -1,5 +1,5 @@
-using Infrastructure.Context;
-using Infrastructure.Seeding;
+using EDWebshop.Data.Context;
+using EDWebshop.Data.Seeding;
 using Microsoft.EntityFrameworkCore;
 
 var builder = WebApplication.CreateBuilder(args);

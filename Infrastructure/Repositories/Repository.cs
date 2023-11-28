@@ -1,9 +1,9 @@
-﻿using Entity;
+﻿using EDWebshop.Contracts;
 using Microsoft.EntityFrameworkCore;
 
-namespace Infrastructure.Repositories
+namespace EDWebshop.Data.Repositories
 {
-    public class Repository<T, T2>(T2 context) : IRepository<T> 
+    public class Repository<T, T2>(T2 context) : IRepository<T>
         where T : class, IEntity
         where T2 : DbContext
     {
@@ -22,10 +22,10 @@ namespace Infrastructure.Repositories
             await _dataContext.SaveChangesAsync();
         }
 
-        public async Task<IEnumerable<T>> GetAllAsync() => 
+        public async Task<IEnumerable<T>> GetAllAsync() =>
             await _dataContext.Set<T>().ToListAsync();
 
-        public async Task<T?> GetAsync(int id) => 
+        public async Task<T?> GetAsync(int id) =>
             await _dataContext.Set<T>().FindAsync(id) ??
             await _dataContext.Set<T>().FirstOrDefaultAsync(x => x.Id == id); // Note: Comprise fallback for MSTest
 

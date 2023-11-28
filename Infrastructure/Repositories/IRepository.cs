@@ -1,7 +1,6 @@
-﻿using Entity;
-using Entity.Entities;
+﻿using EDWebshop.Contracts;
 
-namespace Infrastructure.Repositories
+namespace EDWebshop.Data.Repositories
 {
     public interface IRepository<T> where T : IEntity
     {

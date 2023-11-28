@@ -1,7 +1,7 @@
-﻿using Entity.Entities;
+﻿using EDWebshop.Contracts.Entities;
 using Microsoft.EntityFrameworkCore;
 
-namespace Infrastructure.Context
+namespace EDWebshop.Data.Context
 {
     public class DataContext : DbContext
     {
