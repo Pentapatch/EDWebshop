@@ -53,7 +53,7 @@ namespace Infrastructure.Tests.Repositories
            },
            new FlowerProduct()
            {
-               Id = 1,
+               Id = 2,
                Title = "Skäggvete",
                Description = "Torkad skäggvete med mörka toppar.",
                LongDescription = "Passar utmärkt att arrangera i en smal urna för ett lantligt och naturligt intryck.",
@@ -92,57 +92,77 @@ namespace Infrastructure.Tests.Repositories
             _dbContextMock.Verify(x => x.SaveChangesAsync(default), Times.Once);
         }
 
-        //[TestMethod]
-        //public async Task Create_Async_Should_Add_New_Product_To_Database()
-        //{
-        //    // Arrange
-        //    var options = new DbContextOptionsBuilder<DataContext>()
-        //        .UseInMemoryDatabase(databaseName: "Create_Async_Should_Add_New_Product_To_Database")
-        //        .Options;
+        [TestMethod]
+        public async Task GetAllAsync_Should_Return_All_Items_From_The_Database()
+        {
+            // Arrange
+            var expected = _fakeFlowerProductList;
 
-        //    var product = new FlowerProduct
-        //    {
-        //        Title = "Röda rosor",
-        //        Description = "Vackra röda rosor.",
-        //        LongDescription = "Vackra röda rosor som passar perfekt året om.",
-        //        ImagePath = "https://blombruket.se/wp-content/uploads/2023/08/torkat-bukett-skordefest-1560-1221x1536.jpg.webp",
-        //        Length = 55,
-        //        Weight = 10,
-        //        Variants =
-        //        [
-        //            new ProductVariant
-        //            {
-        //                Name = "Bukett",
-        //                Price = 300,
-        //            },
-        //            new ProductVariant
-        //            {
-        //                Name = "Halvbukett",
-        //                Price = 200,
-        //            },
-        //            new ProductVariant
-        //            {
-        //                Name = "Bunt",
-        //                Price = 89,
-        //            }
-        //        ]
-        //    };
+            // Act
+            var actual = await _sut.GetAllAsync();
 
-        //    // Act
-        //    using (var context = new DataContext(options))
-        //    {
-        //        var repository = new Repository(context);
-        //        await repository.CreateAsync(product);
-        //    }
+            // Assert
+            Assert.AreEqual(expected.Count, actual.Count());
+            Assert.AreEqual(expected.First().Title, actual.First().Title);
+            Assert.AreEqual(expected.Last().Title, actual.Last().Title);
+        }
 
-        //    // Assert
-        //    using (var context = new DataContext(options))
-        //    {
-        //        Assert.AreEqual(1, context.Products.Count());
-        //        Assert.AreEqual("Röda rosor", context.Products.Single().Title);
-        //    }
-        //}
+        [TestMethod]
+        public async Task GetAsync_Should_Return_An_Item_From_The_Database()
+        {
+            // Arrange
+            var id = 1;
+            var expected = _fakeFlowerProductList.First(x => x.Id == id);
 
+            // Act
+            var actual = await _sut.GetAsync(id);
+
+            // Assert
+            Assert.IsNotNull(actual);
+            Assert.AreEqual(expected.Id, actual.Id);
+            Assert.AreEqual(expected.Title, actual.Title);
+        }
+
+        [TestMethod]
+        public async Task GetAsync_Should_Return_Null_When_Given_Invalid_Id()
+        {
+            // Arrange
+            var id = -1;
+
+            // Act
+            var actual = await _sut.GetAsync(id);
+
+            // Assert
+            Assert.IsNull(actual);
+        }
+
+        [TestMethod]
+        public async Task UpdateAsync_Should_Update_An_Item_In_The_Database()
+        {
+            // Arrange
+            var flowerProduct = _fakeFlowerProductList.First();
+
+            // Act
+            await _sut.UpdateAsync(flowerProduct);
+
+            // Assert
+            _dbContextMock.Verify(x => x.Set<FlowerProduct>().Update(flowerProduct), Times.Once);
+            _dbContextMock.Verify(x => x.SaveChangesAsync(default), Times.Once);
+        }
+
+        [TestMethod]
+        public async Task DeleteAsync_Should_Delete_An_Item_From_The_Database()
+        {
+            // Arrange
+            var flowerProduct = _fakeFlowerProductList.First();
+
+            // Act
+            await _sut.DeleteAsync(flowerProduct);
+
+            // Assert
+            _dbContextMock.Verify(x => x.Set<FlowerProduct>().Remove(flowerProduct), Times.Once);
+            _dbContextMock.Verify(x => x.SaveChangesAsync(default), Times.Once);
+        }
 
     }
 }

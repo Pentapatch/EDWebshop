@@ -1,5 +1,4 @@
 ﻿using Entity;
-using Entity.Entities;
 using Microsoft.EntityFrameworkCore;
 
 namespace Infrastructure.Repositories
@@ -17,24 +16,23 @@ namespace Infrastructure.Repositories
             return item;
         }
 
-        public Task DeleteAsync(T item)
+        public async Task DeleteAsync(T item)
         {
-            throw new NotImplementedException();
+            _dataContext.Set<T>().Remove(item);
+            await _dataContext.SaveChangesAsync();
         }
 
-        public Task<IEnumerable<T>> GetAllAsync()
-        {
-            throw new NotImplementedException();
-        }
+        public async Task<IEnumerable<T>> GetAllAsync() => 
+            await _dataContext.Set<T>().ToListAsync();
 
-        public Task<T?> GetAsync(int id)
-        {
-            throw new NotImplementedException();
-        }
+        public async Task<T?> GetAsync(int id) => 
+            await _dataContext.Set<T>().FindAsync(id) ??
+            await _dataContext.Set<T>().FirstOrDefaultAsync(x => x.Id == id); // Note: Comprise fallback for MSTest
 
-        public Task UpdateAsync(T ítem)
+        public async Task UpdateAsync(T ítem)
         {
-            throw new NotImplementedException();
+            _dataContext.Set<T>().Update(ítem);
+            await _dataContext.SaveChangesAsync();
         }
     }
 }
