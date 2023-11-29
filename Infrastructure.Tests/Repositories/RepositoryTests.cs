@@ -1,6 +1,6 @@
-﻿using Entity.Entities;
-using Infrastructure.Context;
-using Infrastructure.Repositories;
+﻿using EDWebshop.Contracts.Entities;
+using EDWebshop.Data.Context;
+using EDWebshop.Data.Repositories;
 using Moq;
 using Moq.EntityFrameworkCore;
 
@@ -31,47 +31,12 @@ namespace Infrastructure.Tests.Repositories
                Id = 1,
                Title = "Torkad lavendel",
                Description = "Luktar gott",
-               LongDescription = "Förgyll ditt hem med en harmonisk doft av lavendel från Frankrike",
-               ImagePath = "http://image.com/example1.png",
-               Length = 10,
-               Weight = 10,
-               Variants =
-                  [
-                      new ProductVariant()
-                      {
-                           Id = 1,
-                           Name = "Bukett",
-                           Price = 295,
-                      },
-                       new ProductVariant()
-                      {
-                           Id = 2,
-                           Name = "Halvbukett",
-                           Price = 198,
-                      }
-                  ]
            },
            new FlowerProduct()
            {
                Id = 2,
                Title = "Skäggvete",
                Description = "Torkad skäggvete med mörka toppar.",
-               LongDescription = "Passar utmärkt att arrangera i en smal urna för ett lantligt och naturligt intryck.",
-               Variants =
-                  [
-                      new ProductVariant()
-                      {
-                           Id = 3,
-                           Name = "Bukett",
-                           Price = 249,
-                      },
-                       new ProductVariant()
-                      {
-                           Id = 4,
-                           Name = "Halvbukett",
-                           Price = 198,
-                      }
-                  ]
            }
         };
 
@@ -79,10 +44,7 @@ namespace Infrastructure.Tests.Repositories
         public async Task AddAsync_Should_Add_An_Item_To_The_Database()
         {
             // Arrange
-            var flowerProduct = new FlowerProduct
-            {
-                Title = "Torkad brudslöja"
-            };
+            var flowerProduct = new FlowerProduct();
 
             // Act
             await _sut.CreateAsync(flowerProduct);

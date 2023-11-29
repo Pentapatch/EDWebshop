@@ -1,5 +1,8 @@
-using Infrastructure.Context;
-using Infrastructure.Seeding;
+using EDWebshop.Api.MappingProfiles;
+using EDWebshop.Contracts.Entities;
+using EDWebshop.Data.Context;
+using EDWebshop.Data.Repositories;
+using EDWebshop.Data.Seeding;
 using Microsoft.EntityFrameworkCore;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -29,6 +32,10 @@ builder.Services.AddDbContext<DataContext>(options =>
 
 // Dependency Injection
 builder.Services.AddScoped<FlowerProductSeeder, FlowerProductSeeder>();
+builder.Services.AddTransient<IRepository<FlowerProduct>, FlowerProductRepository>();
+
+// Automapper Configuration
+builder.Services.AddAutoMapper(typeof(MappingProfile));
 
 var app = builder.Build();
 
@@ -36,7 +43,7 @@ var app = builder.Build();
 if (app.Environment.IsDevelopment())
 {
     app.UseSwagger();
-    app.UseSwaggerUI();
+    app.UseSwaggerUI(x => x.EnableTryItOutByDefault());
 }
 
 app.UseHttpsRedirection();

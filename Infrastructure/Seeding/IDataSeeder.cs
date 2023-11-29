@@ -1,4 +1,4 @@
-﻿namespace Infrastructure.Seeding
+﻿namespace EDWebshop.Data.Seeding
 {
     public interface IDataSeeder
     {

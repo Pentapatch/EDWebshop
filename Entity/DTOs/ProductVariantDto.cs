@@ -1,7 +1,7 @@
-﻿namespace EDWebshop.Contracts.Entities
+﻿namespace EDWebshop.Contracts.DTOs
 {
     #nullable disable
-    public class ProductVariant
+    public class ProductVariantDto
     {
         public int Id { get; set; }
 

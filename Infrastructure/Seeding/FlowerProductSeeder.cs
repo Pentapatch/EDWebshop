@@ -1,8 +1,8 @@
-﻿using Entity.Entities;
-using Infrastructure.Context;
+﻿using EDWebshop.Contracts.Entities;
+using EDWebshop.Data.Context;
 using Microsoft.EntityFrameworkCore;
 
-namespace Infrastructure.Seeding
+namespace EDWebshop.Data.Seeding
 {
     public class FlowerProductSeeder(DataContext context) : IDataSeeder
     {

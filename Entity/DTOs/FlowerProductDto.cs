@@ -1,7 +1,7 @@
-﻿namespace EDWebshop.Contracts.Entities
+﻿namespace EDWebshop.Contracts.DTOs
 {
-#nullable disable
-    public class FlowerProduct : IEntity
+    #nullable disable
+    public class FlowerProductDto
     {
         public int Id { get; set; }
 
@@ -13,7 +13,7 @@
 
         public string LongDescription { get; set; }
 
-        public List<ProductVariant> Variants { get; set; }
+        public List<ProductVariantDto> Variants { get; set; }
 
         public int Length { get; set; }
 
