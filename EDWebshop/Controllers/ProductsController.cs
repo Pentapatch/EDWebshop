@@ -39,5 +39,22 @@ namespace EDWebshop.Api.Controllers
 
             return Ok(productDto);
         }
+
+        [HttpPost]
+        [ProducesResponseType(StatusCodes.Status201Created)]
+        [ProducesResponseType(StatusCodes.Status400BadRequest)]
+        public async Task<ActionResult<FlowerProductDto>> Create([FromBody] FlowerProductDto productDto)
+        {
+            var product = _mapper.Map<FlowerProduct>(productDto);
+
+            if (product.Id != 0)
+                return BadRequest("Id måste vara 0.");
+
+            var createdProduct = await _repository.CreateAsync(product);
+
+            var createdProductDto = _mapper.Map<FlowerProductDto>(createdProduct);
+
+            return CreatedAtAction(nameof(Get), new { id = createdProductDto.Id }, createdProductDto);
+        }
     }
 }

@@ -8,9 +8,9 @@ namespace EDWebshop.Api.MappingProfiles
     {
         public MappingProfile()
         {
-            CreateMap<FlowerProduct, FlowerProductDto>();
+            CreateMap<FlowerProduct, FlowerProductDto>().ReverseMap();
             CreateMap<FlowerProduct, FlowerProductsDto>();
-            CreateMap<ProductVariant, ProductVariantDto>();
+            CreateMap<ProductVariant, ProductVariantDto>().ReverseMap();
         }
     }
 }
