@@ -10,6 +10,7 @@ namespace EDWebshop.Data.Repositories
             await _dataContext.Products.Include(x => x.Variants).ToListAsync();
 
         public async override Task<FlowerProduct?> GetAsync(int id) =>
-            await _dataContext.Products.Include(x => x.Variants).FirstOrDefaultAsync(x => x.Id == id);
+             await _dataContext.Products.Include(x => x.Variants).FirstOrDefaultAsync(x => x.Id == id);
+
     }
 }
