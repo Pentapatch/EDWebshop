@@ -90,14 +90,6 @@ namespace EDWebshop.Api.Controllers
             var updatedProduct = _mapper.Map(productDto, product);
 
             await _repository.UpdateAsync(updatedProduct);
-            //try
-            //{
-            //    await _repository.UpdateAsync(updatedProduct);
-            //}
-            //catch (Exception)
-            //{
-            //    return BadRequest("Kunde inte uppdatera produkten.");
-            //}
 
             return NoContent();
         }

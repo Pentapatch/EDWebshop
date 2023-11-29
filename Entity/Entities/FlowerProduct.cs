@@ -1,5 +1,6 @@
 ﻿namespace EDWebshop.Contracts.Entities
 {
+#nullable disable
     public class FlowerProduct : IEntity
     {
         public int Id { get; set; }

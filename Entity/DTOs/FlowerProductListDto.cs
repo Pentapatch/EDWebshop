@@ -1,5 +1,6 @@
 ﻿namespace EDWebshop.Contracts.DTOs
 {
+    #nullable disable
     public class FlowerProductListDto
     {
         public int Id { get; set; }

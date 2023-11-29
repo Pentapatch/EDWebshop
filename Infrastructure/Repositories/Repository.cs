@@ -9,14 +9,14 @@ namespace EDWebshop.Data.Repositories
     {
         protected readonly T2 _dataContext = context;
 
-        public async Task<T> CreateAsync(T item)
+        public virtual async Task<T> CreateAsync(T item)
         {
             await _dataContext.Set<T>().AddAsync(item);
             await _dataContext.SaveChangesAsync();
             return item;
         }
 
-        public async Task DeleteAsync(T item)
+        public virtual async Task DeleteAsync(T item)
         {
             _dataContext.Set<T>().Remove(item);
             await _dataContext.SaveChangesAsync();
@@ -29,9 +29,9 @@ namespace EDWebshop.Data.Repositories
             await _dataContext.Set<T>().FindAsync(id) ??
             await _dataContext.Set<T>().FirstOrDefaultAsync(x => x.Id == id); // Note: Comprise fallback for MSTest
 
-        public async Task UpdateAsync(T ítem)
+        public virtual async Task UpdateAsync(T item)
         {
-            _dataContext.Set<T>().Update(ítem);
+            _dataContext.Set<T>().Update(item);
             await _dataContext.SaveChangesAsync();
         }
     }

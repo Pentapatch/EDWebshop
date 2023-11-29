@@ -135,5 +135,68 @@ namespace EDWebshop.Api.Tests.Controllers
             Assert.IsNotNull(result);
             Assert.IsInstanceOfType(result.Result, typeof(NotFoundResult));
         }
+
+        [TestMethod]
+        public async Task Create_Should_Return_201_Created_When_Passing_Valid_Object()
+        {
+            // Arrange
+            var product = new FlowerProductDto();
+
+            // Act
+            var result = await _sut.Create(product);
+
+            // Assert
+            Assert.IsNotNull(result);
+            Assert.IsInstanceOfType(result.Result, typeof(CreatedAtActionResult));
+
+            var okObject = result.Result as CreatedAtActionResult;
+            var okObjectValue = okObject!.Value as FlowerProductDto;
+
+            Assert.IsNotNull(okObjectValue);
+            Assert.IsInstanceOfType(okObjectValue, typeof(FlowerProductDto));
+        }
+
+        [TestMethod]
+        public async Task Create_Should_Return_404_BadRequest_When_Passing_Invalid_Object()
+        {
+            // Arrange
+            var product = new FlowerProductDto() { Id = 1 };
+
+            // Act
+            var result = await _sut.Create(product);
+
+            // Assert
+            Assert.IsNotNull(result);
+            Assert.IsInstanceOfType(result.Result, typeof(BadRequestObjectResult));
+        }
+
+        [TestMethod]
+        public async Task Delete_Should_Return_204_NoContent_When_Passing_Valid_Id()
+        {
+            // Arrange
+            var id = 1;
+
+            // Act
+            var result = await _sut.Delete(id);
+
+            // Assert
+            Assert.IsNotNull(result);
+            Assert.IsInstanceOfType(result, typeof(NoContentResult));
+        }
+
+        [TestMethod]
+        public async Task Delete_Should_Return_404_NotFound_When_Passing_Invalid_Id()
+        {
+            // Arrange
+            var id = 7;
+
+            // Act
+            var result = await _sut.Delete(id);
+
+            // Assert
+            Assert.IsNotNull(result);
+            Assert.IsInstanceOfType(result, typeof(NotFoundResult));
+        }
+
     }
 }
