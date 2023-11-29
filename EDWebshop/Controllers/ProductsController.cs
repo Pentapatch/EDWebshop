@@ -14,6 +14,7 @@ namespace EDWebshop.Api.Controllers
         private readonly IMapper _mapper = mapper;
 
         [HttpGet]
+        [ProducesResponseType(StatusCodes.Status200OK)]
         public async Task<ActionResult<IEnumerable<FlowerProductsDto>>> GetAll()
         {
             var products = await _repository.GetAllAsync();
@@ -25,9 +26,14 @@ namespace EDWebshop.Api.Controllers
 
         [HttpGet]
         [Route("{id}")]
+        [ProducesResponseType(StatusCodes.Status200OK)]
+        [ProducesResponseType(StatusCodes.Status404NotFound)]
         public async Task<ActionResult<FlowerProductDto>> Get(int id)
         {
             var product = await _repository.GetAsync(id);
+
+            if (product is null)
+                return NotFound();
 
             var productDto = _mapper.Map<FlowerProductDto>(product);
 

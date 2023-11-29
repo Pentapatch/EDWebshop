@@ -10,18 +10,16 @@ namespace EDWebshop.Data.Tests.Repositories
     public class FlowerProductRepostitoryTests
     {
         private readonly FlowerProductRepository _sut;
-        private readonly Mock<DataContext> _dbContextMock;
-        private readonly List<FlowerProduct> _fakeFlowerProductList;
 
         public FlowerProductRepostitoryTests()
         {
-            _fakeFlowerProductList = GetFakeFlowerProductList();
+            var fakeFlowerProductList = GetFakeFlowerProductList();
 
-            _dbContextMock = new Mock<DataContext>();
-            _dbContextMock.Setup(x => x.Set<FlowerProduct>()).ReturnsDbSet(_fakeFlowerProductList);
-            _dbContextMock.Setup(x => x.Products).ReturnsDbSet(_fakeFlowerProductList);
+            var dbContextMock = new Mock<DataContext>();
+            dbContextMock.Setup(x => x.Set<FlowerProduct>()).ReturnsDbSet(fakeFlowerProductList);
+            dbContextMock.Setup(x => x.Products).ReturnsDbSet(fakeFlowerProductList);
 
-            _sut = new FlowerProductRepository(_dbContextMock.Object);
+            _sut = new FlowerProductRepository(dbContextMock.Object);
         }
 
         private static List<FlowerProduct> GetFakeFlowerProductList() => new()
