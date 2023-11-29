@@ -97,7 +97,7 @@ namespace EDWebshop.Api.Tests.Controllers
             Assert.IsInstanceOfType(result.Result, typeof(OkObjectResult));
 
             var okObject = result.Result as OkObjectResult;
-            var okObjectValue = okObject!.Value as List<FlowerProductsDto>;
+            var okObjectValue = okObject!.Value as List<FlowerProductListDto>;
 
             Assert.AreEqual(2, okObjectValue!.Count);
         }

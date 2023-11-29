@@ -1,6 +1,6 @@
 ﻿namespace EDWebshop.Contracts.DTOs
 {
-    public class FlowerProductsDto
+    public class FlowerProductListDto
     {
         public int Id { get; set; }
 
