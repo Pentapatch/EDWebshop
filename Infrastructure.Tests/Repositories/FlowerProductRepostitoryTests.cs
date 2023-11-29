@@ -87,7 +87,7 @@ namespace EDWebshop.Data.Tests.Repositories
         }
 
         [TestMethod]
-        public async Task GetAllAsync_Should_Return_All_Items_From_The_Database()
+        public async Task GetAllAsync_Should_Return_All_Items_Correctly_Mapped_From_The_Database()
         {
             // Act
             var result = await _sut.GetAllAsync();

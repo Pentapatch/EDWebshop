@@ -77,6 +77,7 @@ namespace EDWebshop.Api.Controllers
         [Route("{id}")]
         [ProducesResponseType(StatusCodes.Status204NoContent)]
         [ProducesResponseType(StatusCodes.Status404NotFound)]
+        [ProducesResponseType(StatusCodes.Status400BadRequest)]
         public async Task<ActionResult> Update(int id, [FromBody] FlowerProductDto productDto)
         {
             if (id != productDto.Id)

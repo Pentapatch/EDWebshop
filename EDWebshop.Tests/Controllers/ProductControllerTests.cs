@@ -198,5 +198,49 @@ namespace EDWebshop.Api.Tests.Controllers
             Assert.IsInstanceOfType(result, typeof(NotFoundResult));
         }
 
+        [TestMethod]
+        public async Task Update_Should_Return_204_NoContent_When_Passing_Valid_Id()
+        {
+            // Arrange
+            var id = 1;
+            var product = new FlowerProductDto() { Id = id };
+
+            // Act
+            var result = await _sut.Update(id, product);
+
+            // Assert
+            Assert.IsNotNull(result);
+            Assert.IsInstanceOfType(result, typeof(NoContentResult));
+        }
+
+        [TestMethod]
+        public async Task Update_Should_Return_404_NotFound_When_Passing_Invalid_Id()
+        {
+            // Arrange
+            var id = 7;
+            var product = new FlowerProductDto() { Id = id };
+
+            // Act
+            var result = await _sut.Update(id, product);
+
+            // Assert
+            Assert.IsNotNull(result);
+            Assert.IsInstanceOfType(result, typeof(NotFoundResult));
+        }
+
+        [TestMethod]
+        public async Task Update_Should_Return_400_BadRequest_When_Passing_Non_Matching_Ids()
+        {
+            // Arrange
+            var id = 2;
+            var product = new FlowerProductDto() { Id = 1 };
+
+            // Act
+            var result = await _sut.Update(id, product);
+
+            // Assert
+            Assert.IsNotNull(result);
+            Assert.IsInstanceOfType(result, typeof(BadRequestObjectResult));
+        }
     }
 }
