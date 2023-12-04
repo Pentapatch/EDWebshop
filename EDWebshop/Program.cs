@@ -46,10 +46,9 @@ if (app.Environment.IsDevelopment())
     app.UseSwaggerUI(x => x.EnableTryItOutByDefault());
 }
 
+app.UseCors("AllowAllPolicy");
 app.UseHttpsRedirection();
-
 app.UseAuthorization();
-
 app.MapControllers();
 
 // Migrate the database
