@@ -13,6 +13,10 @@ namespace EDWebshop.Api.Controllers
         private readonly IRepository<FlowerProduct> _repository = repository;
         private readonly IMapper _mapper = mapper;
 
+        private const string NOT_FOUND_MESSAGE = "Kunde inte hitta produkten i databasen.";
+        private const string ID_IS_NOT_ZERO = "Id på produkten måste vara \"0\".";
+        private const string ID_IS_NOT_MATCHING = "Id i routen matchar inte med produktens Id.";
+
         [HttpGet]
         [ProducesResponseType(StatusCodes.Status200OK)]
         public async Task<ActionResult<IEnumerable<FlowerProductListDto>>> GetAll()
@@ -32,7 +36,7 @@ namespace EDWebshop.Api.Controllers
             var product = _mapper.Map<FlowerProduct>(productDto);
 
             if (product.Id != 0)
-                return BadRequest("Id måste vara 0.");
+                return BadRequest(ID_IS_NOT_ZERO);
 
             var createdProduct = await _repository.CreateAsync(product);
 
@@ -50,7 +54,7 @@ namespace EDWebshop.Api.Controllers
             var product = await _repository.GetAsync(id);
 
             if (product is null)
-                return NotFound();
+                return NotFound(NOT_FOUND_MESSAGE);
 
             var productDto = _mapper.Map<FlowerProductDto>(product);
 
@@ -66,7 +70,7 @@ namespace EDWebshop.Api.Controllers
             var product = await _repository.GetAsync(id);
 
             if (product is null)
-                return NotFound();
+                return NotFound(NOT_FOUND_MESSAGE);
 
             await _repository.DeleteAsync(product);
 
@@ -81,12 +85,12 @@ namespace EDWebshop.Api.Controllers
         public async Task<ActionResult> Update(int id, [FromBody] FlowerProductDto productDto)
         {
             if (id != productDto.Id)
-                return BadRequest("Id stämmer inte överens med id i body.");
+                return BadRequest(ID_IS_NOT_MATCHING);
 
             var product = await _repository.GetAsync(id);
 
             if (product is null)
-                return NotFound();
+                return NotFound(NOT_FOUND_MESSAGE);
 
             var updatedProduct = _mapper.Map(productDto, product);
 
