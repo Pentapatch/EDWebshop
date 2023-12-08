@@ -1,3 +1,4 @@
+using EDWebshop.Api.ErrorHandling;
 using EDWebshop.Api.MappingProfiles;
 using EDWebshop.Contracts.Entities;
 using EDWebshop.Data.Context;
@@ -39,16 +40,22 @@ builder.Services.AddAutoMapper(typeof(MappingProfile));
 
 var app = builder.Build();
 
-// Configure the HTTP request pipeline.
 if (app.Environment.IsDevelopment())
 {
     app.UseSwagger();
     app.UseSwaggerUI(x => x.EnableTryItOutByDefault());
+    app.UseDeveloperExceptionPage();
+}
+else
+{
+    app.UseExceptionHandler("/Error");
+    app.UseHsts();
 }
 
 app.UseCors("AllowAllPolicy");
 app.UseHttpsRedirection();
 app.UseAuthorization();
+app.UseMiddleware<ErrorHandlingMiddleware>();
 app.MapControllers();
 
 // Migrate the database
