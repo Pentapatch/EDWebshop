@@ -133,7 +133,7 @@ namespace EDWebshop.Api.Tests.Controllers
 
             // Assert
             Assert.IsNotNull(result);
-            Assert.IsInstanceOfType(result.Result, typeof(NotFoundResult));
+            Assert.IsInstanceOfType(result.Result, typeof(NotFoundObjectResult));
         }
 
         [TestMethod]
@@ -195,7 +195,7 @@ namespace EDWebshop.Api.Tests.Controllers
 
             // Assert
             Assert.IsNotNull(result);
-            Assert.IsInstanceOfType(result, typeof(NotFoundResult));
+            Assert.IsInstanceOfType(result, typeof(NotFoundObjectResult));
         }
 
         [TestMethod]
@@ -225,7 +225,7 @@ namespace EDWebshop.Api.Tests.Controllers
 
             // Assert
             Assert.IsNotNull(result);
-            Assert.IsInstanceOfType(result, typeof(NotFoundResult));
+            Assert.IsInstanceOfType(result, typeof(NotFoundObjectResult));
         }
 
         [TestMethod]
