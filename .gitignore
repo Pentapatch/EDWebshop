@@ -366,3 +366,5 @@ FodyWeavers.xsd
 /EDWebshop/appsettings.json
 /EDWebshop/appsettings.Development.json
 /EDWebshop/appsettings.Development.json
+/EDWebshop/database.db-shm
+/EDWebshop/database.db-wal
